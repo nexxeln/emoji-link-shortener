@@ -1,4 +1,3 @@
-import { ClerkProvider } from "@clerk/nextjs/app-beta";
 import { Karla } from "next/font/google";
 
 import "./globals.css";
@@ -17,9 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={karla.className}>
-      <ClerkProvider>
-        <body>{children}</body>
-      </ClerkProvider>
+      <body>{children}</body>
     </html>
   );
 }

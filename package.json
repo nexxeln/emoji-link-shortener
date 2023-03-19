@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@clerk/nextjs": "^4.11.11",
     "@planetscale/database": "^1.6.0",
     "@types/node": "18.15.3",
     "@types/react": "18.0.28",
@@ -17,6 +16,7 @@
     "drizzle-orm": "^0.22.0",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
+    "fp-ts": "^2.13.1",
     "next": "13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
