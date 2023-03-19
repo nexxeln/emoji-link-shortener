@@ -18,7 +18,7 @@ export async function createLink({ link, type }: Link): Promise<void> {
     case "emoji":
       const emojiString = getEmojiString(4);
 
-      const didSet = await redis.set(emojiString, link, { nx: true });
+      const didSet = await redis.set(`link/${emojiString}`, link, { nx: true });
 
       if (!didSet) {
         return createLink({ link, type });
