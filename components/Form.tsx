@@ -3,9 +3,9 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
-type FormType = "emoji" | "sketchy";
+import { LinkType } from "~~/core/link";
 
-function getButtonText(type: FormType): string {
+function getButtonText(type: LinkType): string {
   switch (type) {
     case "emoji":
       return "Shorten With Emojis";
@@ -14,7 +14,7 @@ function getButtonText(type: FormType): string {
   }
 }
 
-export default function CreateLinkForm({ type }: { type: FormType }) {
+export default function CreateLinkForm({ type }: { type: LinkType }) {
   const router = useRouter();
   const [link, setLink] = useState("");
   const [isFetching, setIsFetching] = useState(false);
