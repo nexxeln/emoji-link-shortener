@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 import { redis } from "./redis";
-import { getEmojiString } from "./emoji";
+import { getEmojiString } from "./emoji/emoji";
 
 export const LinkType = z.union([z.literal("emoji"), z.literal("sketchy")]);
 
