@@ -22,7 +22,9 @@ export default function CreateLinkForm({ type }: { type: LinkType }) {
 
   const isMutating = isFetching || isPending;
 
-  async function handleSubmit() {
+  async function handleSubmit(event: React.FormEvent) {
+    event.preventDefault();
+
     setIsFetching(true);
 
     await fetch("/api/shorten", {
