@@ -14,7 +14,7 @@ function getButtonText(type: LinkType): string {
   }
 }
 
-export default function CreateLinkForm({ type }: { type: LinkType }) {
+export const CreateLinkForm = ({ type }: { type: LinkType }) => {
   const router = useRouter();
   const [link, setLink] = useState("");
   const [isFetching, setIsFetching] = useState(false);
@@ -66,4 +66,4 @@ export default function CreateLinkForm({ type }: { type: LinkType }) {
       </div>
     </form>
   );
-}
+};

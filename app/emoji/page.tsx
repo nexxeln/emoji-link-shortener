@@ -1,5 +1,5 @@
 // client component
-import CreateLinkForm from "~~/components/Form";
+import { CreateLinkForm } from "~~/components/Form";
 
 export default function EmojiPage() {
   return (
