@@ -9,6 +9,7 @@ export async function POST(request: Request) {
     return new Response("Invalid body", { status: 400 });
   }
 
-  await createLink(body.data);
-  return new Response("OK", { status: 200 });
+  const slug = encodeURI(await createLink(body.data));
+
+  return new Response("OK", { status: 200, headers: { slug } });
 }
