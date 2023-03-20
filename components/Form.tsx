@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
@@ -17,17 +18,17 @@ function getButtonText(type: LinkType): string {
 export const CreateLinkForm = ({ type }: { type: LinkType }) => {
   const router = useRouter();
   const [link, setLink] = useState("");
+  const [slug, setSlug] = useState<string | null>(null);
   const [isFetching, setIsFetching] = useState(false);
-  const [isPending, startTransition] = useTransition();
 
-  const isMutating = isFetching || isPending;
+  const isMutating = isFetching;
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
     setIsFetching(true);
 
-    await fetch("/api/shorten", {
+    const a = await fetch("/api/shorten", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,10 +36,34 @@ export const CreateLinkForm = ({ type }: { type: LinkType }) => {
       body: JSON.stringify({ link, type }),
     });
 
+    setSlug(a.headers.get("slug"));
+    setLink("");
     setIsFetching(false);
-
-    startTransition(() => router.refresh());
   }
+
+  if (slug)
+    return (
+      <>
+        <CreatedLink slug={decodeURI(slug)} />
+        <div className="pt-6" />
+
+        <div className="flex gap-4">
+          <button
+            type="button"
+            className="font-semibold underline decoration-secondary decoration-1 underline-offset-4 transition-colors hover:decoration-primary"
+            onClick={() => setSlug(null)}
+          >
+            Create New Link
+          </button>
+          <Link
+            href="/"
+            className="font-semibold underline decoration-secondary decoration-1 underline-offset-4 transition-colors hover:decoration-primary"
+          >
+            Go Home
+          </Link>
+        </div>
+      </>
+    );
 
   return (
     <form onSubmit={handleSubmit}>
@@ -65,5 +90,21 @@ export const CreateLinkForm = ({ type }: { type: LinkType }) => {
         </button>
       </div>
     </form>
+  );
+};
+
+const CreatedLink = ({ slug }: { slug: string }) => {
+  const link = window.origin + "/" + slug;
+  return (
+    <div className="flex gap-4">
+      <p className="text-lg font-semibold tracking-wide text-primary">{link}</p>
+      <button
+        type="button"
+        className="font-semibold underline decoration-secondary decoration-1 underline-offset-4 transition-colors hover:decoration-primary"
+        onClick={() => navigator.clipboard.writeText(link)}
+      >
+        Copy
+      </button>
+    </div>
   );
 };
