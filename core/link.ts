@@ -25,3 +25,7 @@ export async function createLink({ link, type }: Link): Promise<void> {
       }
   }
 }
+
+export async function getLink(key: string): Promise<string | null> {
+  return await redis.get(`link/${key}`);
+}
