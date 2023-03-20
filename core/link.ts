@@ -13,7 +13,9 @@ export const LinkSchema = z.object({
 export type LinkType = z.infer<typeof LinkType>;
 export type Link = z.infer<typeof LinkSchema>;
 
-export async function createLink({ link, type }: Link): Promise<void> {
+export async function createLink({ link, type }: Link): Promise<string> {
+  let slug = "";
+
   switch (type) {
     case "emoji":
       const emojiString = getEmojiString(4);
@@ -23,7 +25,11 @@ export async function createLink({ link, type }: Link): Promise<void> {
       if (!didSet) {
         return createLink({ link, type });
       }
+
+      slug = emojiString;
   }
+
+  return slug;
 }
 
 export async function getLink(key: string): Promise<string | null> {
