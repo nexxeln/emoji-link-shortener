@@ -1,4 +1,4 @@
-export const runtime = "experimental-edge";
+export const runtime = "edge";
 
 import { LinkSchema, createLink } from "~~/core/link";
 
