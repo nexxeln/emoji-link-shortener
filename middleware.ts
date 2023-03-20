@@ -4,11 +4,16 @@ import { getLink } from "./core/link";
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  if (pathname === "/") {
+    return NextResponse.next();
+  }
+
   const link = await getLink(decodeURI(pathname.slice(1)));
 
   return link
     ? NextResponse.redirect(new URL(link))
-    : NextResponse.redirect(new URL("/", request.url));
+    : NextResponse.redirect(new URL("/oops", request.url));
 }
 
 export const config = {
@@ -21,7 +26,8 @@ export const config = {
      * - favicon.ico (favicon file)
      * - emoji (emoji route)
      * - sketchy (sketchy route)
+     * - oops (oops route)
      */
-    "/((?!api|_next/static|_next/image|favicon.ico|emoji|sketchy).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|emoji|sketchy|oops).*)",
   ],
 };
