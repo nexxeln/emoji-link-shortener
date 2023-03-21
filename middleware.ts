@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { getLink } from "~~/core/link";
+import { getLink, getLinkEverything, incrementLinkClicks } from "~~/core/link";
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -9,11 +9,17 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const link = await getLink(decodeURI(pathname.slice(1)));
+  const key = decodeURI(pathname.slice(1));
 
-  return link
-    ? NextResponse.redirect(new URL(link))
-    : NextResponse.redirect(new URL("/oops", request.url));
+  const link = await getLink(key);
+
+  if (!link) {
+    return NextResponse.redirect(new URL("/oops", request.url));
+  }
+
+  incrementLinkClicks(key);
+
+  return NextResponse.redirect(new URL(link));
 }
 
 export const config = {
