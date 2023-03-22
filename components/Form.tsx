@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState, useTransition } from "react";
 
 import { LinkType } from "~~/core/link";
 
@@ -15,6 +16,7 @@ function getButtonText(type: LinkType): string {
 }
 
 export const CreateLinkForm = ({ type }: { type: LinkType }) => {
+  const router = useRouter();
   const [link, setLink] = useState("");
   const [slug, setSlug] = useState<string | null>(null);
   const [isFetching, setIsFetching] = useState(false);
