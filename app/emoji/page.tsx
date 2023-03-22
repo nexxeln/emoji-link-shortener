@@ -6,7 +6,7 @@ export default function EmojiPage() {
     <div className="flex min-h-screen w-screen flex-col items-center justify-center">
       <h1 className="text-4xl">😱😳🥴🥵</h1>
       <div className="pt-8" />
-      <CreateLinkForm type="emoji" />
+      <CreateLinkForm />
     </div>
   );
 }

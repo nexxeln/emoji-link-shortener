@@ -1,22 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState, useTransition } from "react";
+import { useState } from "react";
 
-import { LinkType } from "~~/core/link";
-
-function getButtonText(type: LinkType): string {
-  switch (type) {
-    case "emoji":
-      return "Shorten With Emojis";
-    case "sketchy":
-      return "Create Sketchy Link";
-  }
-}
-
-export const CreateLinkForm = ({ type }: { type: LinkType }) => {
-  const router = useRouter();
+export const CreateLinkForm = () => {
   const [link, setLink] = useState("");
   const [slug, setSlug] = useState<string | null>(null);
   const [isFetching, setIsFetching] = useState(false);
@@ -33,7 +20,7 @@ export const CreateLinkForm = ({ type }: { type: LinkType }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ link, type }),
+      body: JSON.stringify({ link }),
     });
 
     setSlug(a.headers.get("slug"));
@@ -86,7 +73,7 @@ export const CreateLinkForm = ({ type }: { type: LinkType }) => {
             isMutating ? "cursor-not-allowed opacity-70" : ""
           }`}
         >
-          {getButtonText(type)}
+          Shorten With Emojis
         </button>
       </div>
     </form>

@@ -5,7 +5,7 @@ export default function Home() {
     <div className="flex min-h-screen flex-col items-center justify-center">
       <h1 className="text-5xl font-black uppercase tracking-wider">spores</h1>
       <p className="text-xl font-semibold tracking-wide text-secondary">
-        An Iconoclastic Link Shortener
+        The Emoji Link Shortener
       </p>
       <div className="pt-6" />
       <div className="flex gap-8 text-lg">
@@ -13,13 +13,13 @@ export default function Home() {
           href="/emoji"
           className="underline decoration-secondary decoration-1 underline-offset-4 transition-colors hover:decoration-primary"
         >
-          Emoji
+          Create A Link
         </Link>
         <Link
-          href="/sketchy"
+          href="/emoji"
           className="underline decoration-secondary decoration-1 underline-offset-4 transition-colors hover:decoration-primary"
         >
-          Sketchy
+          Sign In
         </Link>
       </div>
     </div>

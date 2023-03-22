@@ -25,9 +25,8 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      * - emoji (emoji route)
-     * - sketchy (sketchy route)
      * - oops (oops route)
      */
-    "/((?!api|_next/static|_next/image|favicon.ico|emoji|sketchy|oops).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|emoji|oops).*)",
   ],
 };
