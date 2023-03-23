@@ -9,7 +9,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const link = await getLink(decodeURI(pathname.slice(1)));
+  const link = await getLink({ slug: decodeURI(pathname.slice(1)) });
 
   return link
     ? NextResponse.redirect(new URL(link))
