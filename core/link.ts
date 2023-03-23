@@ -1,34 +1,53 @@
-import { z } from "zod";
+import { nanoid } from "nanoid";
 
-import { redis } from "./redis";
+import { db, type Link } from "./db";
 import { getEmojiString } from "./emoji/emoji";
 
-export const LinkSchema = z.object({
-  link: z.string().url(),
-});
+// checkLink
+// takes a slug and returns a boolean
+// function param should be Pick<Link, "slug">
+export async function checkLink({
+  slug,
+}: Pick<Link, "slug">): Promise<boolean> {
+  const { rows } = await db.execute("select * from `Link` where `slug` = ?", [
+    slug,
+  ]);
 
-export type Link = z.infer<typeof LinkSchema>;
+  return !!rows.length;
+}
 
-async function getUniqueSlug(): Promise<string> {
+// createLink
+// takes a url and returns a slug and stores it in the database
+// function param should be Pick<Link, "url">
+export async function createLink({ url }: Pick<Link, "url">): Promise<string> {
   const slug = getEmojiString(4);
 
-  const didSet = await redis.set(`link/${slug}`, "", { nx: true });
-
-  if (!didSet) {
-    return getUniqueSlug();
+  if (await checkLink({ slug })) {
+    return createLink({ url });
   }
 
+  const mysqlDate = new Date().toISOString().slice(0, 19).replace("T", " ");
+
+  await db.execute(
+    "insert into `Link` (`id`, `createdAt`, `slug`, `url`) values (?, ?, ?, ?)",
+    [nanoid(), mysqlDate, slug, url]
+  );
+
   return slug;
 }
 
-export async function createLink({ link }: Link): Promise<string> {
-  const slug = await getUniqueSlug();
+// getLink
+// takes a slug and returns a url
+// function param should be Pick<Link, "slug">
+export async function getLink({
+  slug,
+}: Pick<Link, "slug">): Promise<string | null> {
+  const { rows: queriedRows } = await db.execute(
+    "select * from `Link` where `slug` = ?",
+    [slug]
+  );
 
-  await redis.set(`link/${slug}`, link);
+  const rows = queriedRows as Link[];
 
-  return slug;
-}
-
-export async function getLink(key: string): Promise<string | null> {
-  return await redis.get(`link/${key}`);
+  return rows.length ? rows[0].url : null;
 }
