@@ -9,8 +9,8 @@ datasource db {
 }
 
 model Link {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
+  id        String   @id
+  createdAt DateTime
   slug      String   @unique
   url       String   @db.LongText
 

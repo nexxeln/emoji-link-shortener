@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 export const CreateLinkForm = () => {
-  const [link, setLink] = useState("");
+  const [url, setUrl] = useState("");
   const [slug, setSlug] = useState<string | null>(null);
   const [isFetching, setIsFetching] = useState(false);
 
@@ -20,11 +20,11 @@ export const CreateLinkForm = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ link }),
+      body: JSON.stringify({ url }),
     });
 
     setSlug(a.headers.get("slug"));
-    setLink("");
+    setUrl("");
     setIsFetching(false);
   }
 
@@ -63,8 +63,8 @@ export const CreateLinkForm = () => {
           placeholder="https://link-you-wanna-shorten.com"
           className="w-[17rem] border-b border-b-secondary bg-dark focus:border-b-primary focus:outline-none"
           required
-          value={link}
-          onChange={(event) => setLink(event.target.value)}
+          value={url}
+          onChange={(event) => setUrl(event.target.value)}
         />
         <button
           type="submit"

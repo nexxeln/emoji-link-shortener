@@ -1,9 +1,14 @@
-export const runtime = "nodejs";
+export const runtime = "edge";
 
-import { LinkSchema, createLink } from "~~/core/link";
+import { z } from "zod";
+import { createLink } from "~~/core/link";
+
+const BodySchema = z.object({
+  url: z.string().url(),
+});
 
 export async function POST(request: Request) {
-  const body = LinkSchema.safeParse(await request.json());
+  const body = BodySchema.safeParse(await request.json());
 
   if (!body.success) {
     return new Response("Invalid body", { status: 400 });

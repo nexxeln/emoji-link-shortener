@@ -14,12 +14,11 @@
   "dependencies": {
     "@planetscale/database": "^1.6.0",
     "@prisma/client": "^4.11.0",
-    "@types/node": "18.15.3",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
-    "@upstash/redis": "^1.20.1",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
+    "nanoid": "^4.0.1",
     "next": "13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -27,6 +26,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@types/node": "18.15.3",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.21",
     "prettier": "^2.8.4",
