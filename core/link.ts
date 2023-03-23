@@ -1,11 +1,8 @@
 import { nanoid } from "nanoid";
 
 import { db, type Link } from "./db";
-import { getEmojiString } from "./emoji/emoji";
+import { getEmojiString } from "./emoji";
 
-// checkLink
-// takes a slug and returns a boolean
-// function param should be Pick<Link, "slug">
 export async function checkLink({
   slug,
 }: Pick<Link, "slug">): Promise<boolean> {
@@ -16,9 +13,6 @@ export async function checkLink({
   return !!rows.length;
 }
 
-// createLink
-// takes a url and returns a slug and stores it in the database
-// function param should be Pick<Link, "url">
 export async function createLink({ url }: Pick<Link, "url">): Promise<string> {
   const slug = getEmojiString(4);
 
@@ -36,9 +30,6 @@ export async function createLink({ url }: Pick<Link, "url">): Promise<string> {
   return slug;
 }
 
-// getLink
-// takes a slug and returns a url
-// function param should be Pick<Link, "slug">
 export async function getLink({
   slug,
 }: Pick<Link, "slug">): Promise<string | null> {
