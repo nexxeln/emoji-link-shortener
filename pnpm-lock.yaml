@@ -10,6 +10,7 @@ specifiers:
   autoprefixer: ^10.4.14
   eslint: 8.36.0
   eslint-config-next: 13.2.4
+  nanoid: ^4.0.1
   next: 13.2.4
   postcss: ^8.4.21
   prettier: ^2.8.4
@@ -24,12 +25,12 @@ specifiers:
 dependencies:
   '@planetscale/database': 1.6.0
   '@prisma/client': 4.11.0_prisma@4.11.0
-  '@types/node': 18.15.3
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
   '@upstash/redis': 1.20.1
   eslint: 8.36.0
   eslint-config-next: 13.2.4_j4766f7ecgqbon3u7zlxn5zszu
+  nanoid: 4.0.1
   next: 13.2.4_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -37,6 +38,7 @@ dependencies:
   zod: 3.21.4
 
 devDependencies:
+  '@types/node': 18.15.3
   autoprefixer: 10.4.14_postcss@8.4.21
   postcss: 8.4.21
   prettier: 2.8.4
@@ -310,7 +312,7 @@ packages:
 
   /@types/node/18.15.3:
     resolution: {integrity: sha512-p6ua9zBxz5otCmbpb5D3U4B5Nanw6Pk3PPyX05xnxbB/fRv71N7CPmORg7uAD5P70T0xmx1pzAx/FUfa5X+3cw==}
-    dev: false
+    dev: true
 
   /@types/prop-types/15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
@@ -1751,6 +1753,12 @@ packages:
     resolution: {integrity: sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
+
+  /nanoid/4.0.1:
+    resolution: {integrity: sha512-udKGtCCUafD3nQtJg9wBhRP3KMbPglUsgV5JVsXhvyBs/oefqb4sqMEhKBBgqZncYowu58p1prsZQBYvAj/Gww==}
+    engines: {node: ^14 || ^16 || >=18}
+    hasBin: true
+    dev: false
 
   /natural-compare/1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
