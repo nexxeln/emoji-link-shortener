@@ -1,4 +1,4 @@
-export const runtime = "edge";
+export const runtime = "experimental-edge";
 
 import { z } from "zod";
 import { createLink } from "~~/core/link";
