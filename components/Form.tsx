@@ -6,6 +6,7 @@ import { useState } from "react";
 export const CreateLinkForm = () => {
   const [url, setUrl] = useState("");
   const [slug, setSlug] = useState<string | null>(null);
+  const [id, setId] = useState<string | null>(null);
   const [isFetching, setIsFetching] = useState(false);
 
   const isMutating = isFetching;
@@ -22,7 +23,7 @@ export const CreateLinkForm = () => {
       },
       body: JSON.stringify({ url }),
     });
-
+    setId(a.headers.get("urlId"));
     setSlug(a.headers.get("slug"));
     setUrl("");
     setIsFetching(false);
@@ -31,14 +32,16 @@ export const CreateLinkForm = () => {
   if (slug)
     return (
       <>
-        <CreatedLink slug={decodeURI(slug)} />
+        <CreatedLink id={id} slug={decodeURI(slug)} />
         <div className="pt-6" />
 
         <div className="flex gap-4">
           <button
             type="button"
             className="font-semibold underline decoration-secondary decoration-1 underline-offset-4 transition-colors hover:decoration-primary"
-            onClick={() => setSlug(null)}
+            onClick={() => {
+              setSlug(null), setId(null);
+            }}
           >
             Create New Link
           </button>
@@ -80,11 +83,23 @@ export const CreateLinkForm = () => {
   );
 };
 
-const CreatedLink = ({ slug }: { slug: string }) => {
+const CreatedLink = ({ id, slug }: { id: string | null; slug: string }) => {
   const link = window.origin + "/" + slug;
+  const linkId = window.origin + "/" + id;
   return (
-    <div className="flex gap-4">
-      <p className="text-lg font-semibold tracking-wide text-primary">{link}</p>
+    <div className="flex flex-col gap-4">
+      <p className="text-lg font-semibold tracking-wide text-primary">
+        From Emojies :
+        <a target="_blank" href={link} rel="nofollow">
+          {link}
+        </a>
+      </p>
+      <p className="text-lg font-semibold tracking-wide text-primary">
+        From Id :
+        <a target="_blank" href={linkId} rel="nofollow">
+          {linkId}
+        </a>
+      </p>
       <button
         type="button"
         className="font-semibold underline decoration-secondary decoration-1 underline-offset-4 transition-colors hover:decoration-primary"
