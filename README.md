@@ -2,6 +2,8 @@
 
 This is a simple web app that allows you to shorten links using emojis. It's a fun way to share links. This was mainly built as a way to play around with the new Next 13 App Router, and I did play around with a lot of stuff that is deleted now.
 
+I was going to make a much bigger app but then I got bored.
+
 ### Self Hosting
 
 - Clone the repo.
